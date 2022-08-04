@@ -2,8 +2,7 @@
 
 Ported to C from https://github.com/JChristensen/movingAvg
 by Christopher Lange
-
-README file  
+ 
 ## License
 GNU GPL v3.0
 
