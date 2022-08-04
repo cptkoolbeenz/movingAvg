@@ -3,12 +3,14 @@
 // Copyright (C) 2022 by Christopher Lange and licensed under
 // GNU GPL v3.0, https://www.gnu.org/licenses/gpl.html
 
-#include <movingAvg.h>
+#include "movingAvg.h"
 
 // initialize - allocate the interval array
 void movingAvg_init(mAvg_t *mAvgData, uint16_t maxAvgLength)
 {
-	movingAvg_reset(mAvgData);
+	mAvgData->m_nbrReadings = 0;
+    mAvgData->m_sum = 0;
+    mAvgData->m_next = 0;
 	mAvgData->m_interval = maxAvgLength;
 }
 
@@ -40,7 +42,8 @@ int32_t movingAvg_getAvg(mAvg_t *mAvgData, int32_t nPoints)
     else {
         int64_t sum = {0};
         int32_t i = mAvgData->m_next;
-        for (int32_t n = 0; n < nPoints; ++n) {
+        int32_t n = 0;
+        for (n = 0; n < nPoints; ++n) {
             if (i == 0) {
                 i = mAvgData->m_interval - 1;
             }
